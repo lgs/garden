@@ -52,6 +52,20 @@ The environment variable value.
 | -------- |
 | `string` |
 
+### `${local.branch}`
+
+The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${local.branch}
+```
+
 ### `${local.platform}`
 
 A string indicating the platform that the framework is running on (see https://nodejs.org/api/process.html#process_process_platform)
@@ -145,6 +159,20 @@ The environment variable value.
 | Type     |
 | -------- |
 | `string` |
+
+### `${local.branch}`
+
+The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${local.branch}
+```
 
 ### `${local.platform}`
 
@@ -271,6 +299,20 @@ The environment variable value.
 | Type     |
 | -------- |
 | `string` |
+
+### `${local.branch}`
+
+The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${local.branch}
+```
 
 ### `${local.platform}`
 
@@ -490,6 +532,20 @@ The environment variable value.
 | Type     |
 | -------- |
 | `string` |
+
+### `${local.branch}`
+
+The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${local.branch}
+```
 
 ### `${local.platform}`
 
@@ -878,6 +934,20 @@ The environment variable value.
 | -------- |
 | `string` |
 
+### `${local.branch}`
+
+The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${local.branch}
+```
+
 ### `${local.platform}`
 
 A string indicating the platform that the framework is running on (see https://nodejs.org/api/process.html#process_process_platform)
@@ -1261,6 +1331,20 @@ The environment variable value.
 | Type     |
 | -------- |
 | `string` |
+
+### `${local.branch}`
+
+The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits.
+
+| Type     |
+| -------- |
+| `string` |
+
+Example:
+
+```yaml
+my-variable: ${local.branch}
+```
 
 ### `${local.platform}`
 

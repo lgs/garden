@@ -262,6 +262,16 @@ class LocalContext extends ConfigContext {
     joi
       .string()
       .description(
+        "The current Git branch (or the equivalent for other version control systems). Resolves to an empty string if the repository has no commits."
+      )
+      .example("my-feature-branch")
+  )
+  public branch: string
+
+  @schema(
+    joi
+      .string()
+      .description(
         "A string indicating the platform that the framework is running on " +
           "(see https://nodejs.org/api/process.html#process_process_platform)"
       )
@@ -277,9 +287,10 @@ class LocalContext extends ConfigContext {
   )
   public username?: string
 
-  constructor(root: ConfigContext, artifactsPath: string, username?: string) {
+  constructor(root: ConfigContext, artifactsPath: string, branch: string, username?: string) {
     super(root)
     this.artifactsPath = artifactsPath
+    this.branch = branch
     this.env = process.env
     this.platform = process.platform
     this.username = username
@@ -313,14 +324,16 @@ export class DefaultEnvironmentContext extends ConfigContext {
   constructor({
     projectName,
     artifactsPath,
+    branch,
     username,
   }: {
     projectName: string
     artifactsPath: string
+    branch: string
     username?: string
   }) {
     super()
-    this.local = new LocalContext(this, artifactsPath, username)
+    this.local = new LocalContext(this, artifactsPath, branch, username)
     this.project = new ProjectContext(this, projectName)
   }
 }
@@ -328,6 +341,7 @@ export class DefaultEnvironmentContext extends ConfigContext {
 export interface ProjectConfigContextParams {
   projectName: string
   artifactsPath: string
+  branch: string
   username?: string
   secrets: PrimitiveMap
 }
@@ -360,8 +374,8 @@ export class ProjectConfigContext extends DefaultEnvironmentContext {
   )
   public secrets: PrimitiveMap
 
-  constructor({ projectName, artifactsPath, username, secrets }: ProjectConfigContextParams) {
-    super({ projectName, artifactsPath, username })
+  constructor({ projectName, artifactsPath, branch, username, secrets }: ProjectConfigContextParams) {
+    super({ projectName, artifactsPath, branch, username })
     this.secrets = secrets
   }
 }
@@ -403,17 +417,19 @@ export class EnvironmentConfigContext extends ProjectConfigContext {
   constructor({
     projectName,
     artifactsPath,
+    branch,
     username,
     variables,
     secrets,
   }: {
     projectName: string
     artifactsPath: string
+    branch: string
     username?: string
     variables: DeepPrimitiveMap
     secrets: PrimitiveMap
   }) {
-    super({ projectName, artifactsPath, username, secrets })
+    super({ projectName, artifactsPath, branch, username, secrets })
     this.variables = this.var = variables
   }
 }
@@ -478,6 +494,7 @@ export class WorkflowConfigContext extends EnvironmentConfigContext {
     super({
       projectName: garden.projectName,
       artifactsPath: garden.artifactsPath,
+      branch: garden.vcsBranch,
       username: garden.username,
       variables: garden.variables,
       secrets: garden.secrets,

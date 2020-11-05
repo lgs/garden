@@ -323,6 +323,7 @@ describe("ProjectConfigContext", () => {
     const c = new ProjectConfigContext({
       projectName: "some-project",
       artifactsPath: "/tmp",
+      branch: "main",
       username: "some-user",
       secrets: {},
     })
@@ -336,6 +337,7 @@ describe("ProjectConfigContext", () => {
     const c = new ProjectConfigContext({
       projectName: "some-project",
       artifactsPath: "/tmp",
+      branch: "main",
       username: "some-user",
       secrets: { foo: "banana" },
     })
@@ -348,6 +350,7 @@ describe("ProjectConfigContext", () => {
     const c = new ProjectConfigContext({
       projectName: "some-project",
       artifactsPath: "/tmp",
+      branch: "main",
       username: "some-user",
       secrets: {},
     })
@@ -364,11 +367,25 @@ describe("ProjectConfigContext", () => {
     const c = new ProjectConfigContext({
       projectName: "some-project",
       artifactsPath: "/tmp",
+      branch: "main",
       username: "some-user",
       secrets: {},
     })
     expect(c.resolve({ key: ["local", "platform"], nodePath: [], opts: {} })).to.eql({
       resolved: process.platform,
+    })
+  })
+
+  it("should resolve the current git branch", () => {
+    const c = new ProjectConfigContext({
+      projectName: "some-project",
+      artifactsPath: "/tmp",
+      branch: "main",
+      username: "some-user",
+      secrets: {},
+    })
+    expect(c.resolve({ key: ["local", "branch"], nodePath: [], opts: {} })).to.eql({
+      resolved: "main",
     })
   })
 })
