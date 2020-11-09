@@ -48,6 +48,7 @@ export class BuildCommand extends Command<Args, Opts> {
 
   protected = true
   workflows = true
+  streamEvents = true
 
   description = dedent`
     Builds all or specified modules, taking into account build dependency order.

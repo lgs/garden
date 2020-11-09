@@ -280,19 +280,21 @@ ${renderCommands(commands)}
         }
 
         const enterpriseContext = makeEnterpriseContext(garden)
-        if (enterpriseContext) {
-          log.silly(`Connecting Garden instance to GE BufferedEventStream`)
-          bufferedEventStream.connect({
-            garden,
-            targets: [
-              {
-                host: enterpriseContext.enterpriseDomain,
-                clientAuthToken: enterpriseContext.clientAuthToken,
-              },
-            ],
-          })
-        } else {
-          log.silly(`Skip connecting Garden instance to GE BufferedEventStream`)
+        if (command.streamEvents) {
+          if (enterpriseContext) {
+            log.silly(`Connecting Garden instance to GE BufferedEventStream`)
+            bufferedEventStream.connect({
+              garden,
+              targets: [
+                {
+                  host: enterpriseContext.enterpriseDomain,
+                  clientAuthToken: enterpriseContext.clientAuthToken,
+                },
+              ],
+            })
+          } else {
+            log.silly(`Skip connecting Garden instance to GE BufferedEventStream`)
+          }
         }
 
         // Register log file writers. We need to do this after the Garden class is initialised because

@@ -48,6 +48,8 @@ export class RunWorkflowCommand extends Command<Args, {}> {
   name = "workflow"
   help = "Run a workflow."
 
+  streamEvents = true
+
   description = dedent`
     Runs the commands and/or scripts defined in the workflow's steps, in sequence.
 

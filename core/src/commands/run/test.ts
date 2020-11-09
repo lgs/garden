@@ -72,6 +72,7 @@ export class RunTestCommand extends Command<Args, Opts> {
   help = "Run the specified module test."
 
   workflows = true
+  streamEvents = true
 
   description = dedent`
     This can be useful for debugging tests, particularly integration/end-to-end tests.
